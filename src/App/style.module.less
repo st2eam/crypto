@@ -87,6 +87,33 @@
             border-color: #1976d2;
             outline-color: #1976d2;
         }
+
+        &::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        &::-webkit-scrollbar:hover {
+            cursor: default;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba(#bbbbbb, 0.6);
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            cursor: default;
+            background-color: rgba(#bbbbbb, 0.8);
+        }
+
+        &::-webkit-scrollbar-thumb:active {
+            background-color: rgba(#bbbbbb, 1.0);
+        }
+
+        &::-webkit-scrollbar-button {
+            display: none;
+        }
+
     }
 
 
