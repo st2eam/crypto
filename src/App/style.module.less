@@ -1,0 +1,103 @@
+.crypto {
+    margin: 0 auto;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+
+    .input-wrap,
+    .output-wrap {
+        position: relative;
+        flex: 1;
+        height: 300px;
+        width: 100%;
+
+        .label {
+            position: absolute;
+            user-select: none;
+            top: 10px;
+            left: 10px;
+            background-color: transparent;
+            padding: 0 6px;
+            font-size: 16px;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        &.active,
+        &:focus-within {
+            .label {
+                border-radius: 6px;
+                font-size: 14px;
+                top: -10px;
+                color: #1976d2;
+                background-color: #fff;
+            }
+        }
+
+        &:hover {
+
+            .input-area,
+            .output-area {
+                border-color: #1976d2;
+            }
+
+            .label {
+                color: #1976d2;
+            }
+        }
+    }
+
+    .output-wrap {
+        .output-btn-group {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+
+            .icon-btn {
+                visibility: hidden;
+                opacity: 0;
+                transition: all 0.3s;
+            }
+
+            .show-btn {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+
+    .input-area,
+    .output-area {
+        height: 100%;
+        width: 100%;
+        padding: 20px;
+        overflow-y: auto;
+        border-radius: 10px;
+        position: relative;
+        border: 1px solid #ccc;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        word-break: break-all;
+
+        &:focus {
+            border-color: #1976d2;
+            outline-color: #1976d2;
+        }
+    }
+
+
+
+}
+
+@media screen and (max-width: 768px) {
+    .crypto {
+        flex-direction: column;
+        gap: 10px;
+        height: 100vh;
+        padding-bottom: 60px;
+    }
+}
