@@ -5,6 +5,7 @@ import useSingleton from '@/hooks/useSingleton'
 import useSecret from '@/hooks/useSecret'
 import SwapHoriz from '@mui/icons-material/SwapHoriz'
 import ContentCopy from '@mui/icons-material/ContentCopy'
+import Clear from '@mui/icons-material/Clear'
 import Button from '@mui/material/Button'
 import SettingButton from '@/components/Setting'
 
@@ -83,11 +84,19 @@ const ChatInput: React.FC = () => {
 		singleton.setSource(singleton.value)
 	}
 
+	const clear = () => {
+		if (inputRef.current) {
+			inputRef.current.innerHTML = ''
+		}
+		singleton.setValue('')
+	}
+
 	return (
 		<div className={styles.crypto}>
 			<div
-				className={`${styles['input-wrap']} ${singleton.source !== '' ? styles.active : ''
-					}`}
+				className={`${styles['input-wrap']} ${
+					singleton.source !== '' ? styles.active : ''
+				}`}
 			>
 				<span className={styles.label}>原始数据</span>
 				<div
@@ -108,6 +117,17 @@ const ChatInput: React.FC = () => {
 						singleton.setSource(e.currentTarget.innerHTML)
 					}}
 				></div>
+				<div className={styles['btn-group']}>
+					<Button
+						className={`${styles['icon-btn']} ${
+							singleton.value ? styles['show-btn'] : ''
+						}`}
+						size="small"
+						onClick={clear}
+					>
+						<Clear />
+					</Button>
+				</div>
 			</div>
 			<Button
 				color="primary"
@@ -119,21 +139,24 @@ const ChatInput: React.FC = () => {
 				<SwapHoriz />
 			</Button>
 			<div
-				className={`${styles['output-wrap']} ${singleton.value !== '' ? styles.active : ''
-					}`}
+				className={`${styles['output-wrap']} ${
+					singleton.value !== '' ? styles.active : ''
+				}`}
 			>
 				<span className={styles.label}>分析结果</span>
 				<div ref={outputRef} className={styles['output-area']}></div>
-				<div className={styles['output-btn-group']}>
+				<div className={styles['btn-group']}>
 					<SettingButton
-						className={`${styles['icon-btn']} ${singleton.source === 'setting'
+						className={`${styles['icon-btn']} ${
+							singleton.source === 'setting'
 								? styles['show-btn']
 								: ''
-							}`}
+						}`}
 					/>
 					<Button
-						className={`${styles['icon-btn']} ${singleton.source ? styles['show-btn'] : ''
-							}`}
+						className={`${styles['icon-btn']} ${
+							singleton.source ? styles['show-btn'] : ''
+						}`}
 						size="small"
 						onClick={copyToClipboard}
 					>
