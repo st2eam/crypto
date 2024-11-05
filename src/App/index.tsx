@@ -85,10 +85,11 @@ const ChatInput: React.FC = () => {
 	}
 
 	const clear = () => {
+		singleton.setSource('')
 		if (inputRef.current) {
+			inputRef.current.blur()
 			inputRef.current.innerHTML = ''
 		}
-		singleton.setValue('')
 	}
 
 	return (
