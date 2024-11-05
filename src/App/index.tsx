@@ -67,7 +67,7 @@ const ChatInput: React.FC = () => {
 				singleton.encrypt(prefix + singleton.source, secret.getValue())
 			)
 		}
-	}, [singleton.source, inputRef])
+	}, [singleton.source, prefix, inputRef])
 
 	useEffect(() => {
 		if (!outputRef.current) {
@@ -86,9 +86,8 @@ const ChatInput: React.FC = () => {
 	return (
 		<div className={styles.crypto}>
 			<div
-				className={`${styles['input-wrap']} ${
-					singleton.source !== '' ? styles.active : ''
-				}`}
+				className={`${styles['input-wrap']} ${singleton.source !== '' ? styles.active : ''
+					}`}
 			>
 				<span className={styles.label}>原始数据</span>
 				<div
@@ -120,24 +119,21 @@ const ChatInput: React.FC = () => {
 				<SwapHoriz />
 			</Button>
 			<div
-				className={`${styles['output-wrap']} ${
-					singleton.value !== '' ? styles.active : ''
-				}`}
+				className={`${styles['output-wrap']} ${singleton.value !== '' ? styles.active : ''
+					}`}
 			>
 				<span className={styles.label}>分析结果</span>
 				<div ref={outputRef} className={styles['output-area']}></div>
 				<div className={styles['output-btn-group']}>
 					<SettingButton
-						className={`${styles['icon-btn']} ${
-							singleton.source === 'setting'
+						className={`${styles['icon-btn']} ${singleton.source === 'setting'
 								? styles['show-btn']
 								: ''
-						}`}
+							}`}
 					/>
 					<Button
-						className={`${styles['icon-btn']} ${
-							singleton.source ? styles['show-btn'] : ''
-						}`}
+						className={`${styles['icon-btn']} ${singleton.source ? styles['show-btn'] : ''
+							}`}
 						size="small"
 						onClick={copyToClipboard}
 					>
