@@ -1,50 +1,48 @@
-# React + TypeScript + Vite
+# Crypto - 浏览器端 AES 加解密工具
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+纯前端 AES 加密/解密工具，支持文本和文件两种模式。所有加解密均在浏览器本地完成，密钥不会上传到服务器。
 
-Currently, two official plugins are available:
+## 功能
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 文本加解密
+- 输入明文自动加密，粘贴密文自动解密（通过密钥前缀智能识别）
+- 一键复制加密结果（同时复制纯文本和 HTML 格式）
+- 支持中文输入法（composition 事件处理）
+- 可自定义密钥（同时作为加密密码和密文识别前缀）
 
-## Expanding the ESLint configuration
+### 文件加解密
+- 拖拽或点击上传任意文件，自动加密为 `.encrypted` 文件
+- 上传 `.encrypted` 文件自动解密还原原始文件
+- 加密数据包含原始文件名和 MIME 类型，解密后完整恢复
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 使用方法
 
-- Configure the top-level `parserOptions` property like this:
+```bash
+# 安装依赖（需要 Bun）
+bun install
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+# 启动开发服务器
+bun dev
+
+# 构建生产版本（输出到 docs/ 目录）
+bun run build
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## 技术栈
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- **React 18** + **TypeScript**
+- **Vite** 构建工具
+- **MUI v6** 组件库（Snackbar、Drawer、Alert 等）
+- **crypto-js** AES 加解密
+- **styled-components** + **Less** 样式方案
+- **Orbitron** + **Exo 2** 字体
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## 部署
+
+本项目通过 GitHub Pages 部署，访问地址：`https://st2eam.github.io/crypto/`
+
+推送代码到 `main` 分支后，GitHub Actions 会自动构建并部署。
+
+## License
+
+MIT

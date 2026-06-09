@@ -15,12 +15,15 @@ export const SingletonContext = createContext<ISingleton>({
 	decrypt: () => {
 		return ''
 	},
+	error: null,
+	setError: () => {},
 })
 
 // 创建单例对象的提供者
 export const SingletonProvider = ({ children }: { children: ReactNode }) => {
 	const [value, setValue] = useState('')
 	const [source, setSource] = useState('')
+	const [error, setError] = useState<string | null>(null)
 
 	const encrypt = (value: string, secret_key: string) => {
 		const res = AES.encrypt(value, secret_key).toString()
@@ -30,9 +33,14 @@ export const SingletonProvider = ({ children }: { children: ReactNode }) => {
 		try {
 			const bytes = AES.decrypt(value, secret_key)
 			const originalText = bytes.toString(CryptoJS.enc.Utf8)
+			if (!originalText) {
+				setError('解密失败：密钥不正确或数据格式无效')
+				return value
+			}
+			setError(null)
 			return originalText
-		} catch (error) {
-			// console.error('解密失败:', error)
+		} catch (_error) {
+			setError('解密失败：密钥不正确或数据格式无效')
 		}
 		return value
 	}
@@ -43,6 +51,8 @@ export const SingletonProvider = ({ children }: { children: ReactNode }) => {
 		setSource,
 		encrypt,
 		decrypt,
+		error,
+		setError,
 	}
 
 	return (
